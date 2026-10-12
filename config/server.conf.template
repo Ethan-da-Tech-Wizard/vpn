@@ -1,0 +1,16 @@
+# WireGuard VPN Server Template
+# Private, leak-proof, zero-logs configuration
+
+[Interface]
+Address = 10.8.0.1/24, fd86:ea04:1111::1/64
+ListenPort = 51820
+PrivateKey = SERVER_PRIVATE_KEY
+
+# Automatic anti-leak iptables rules on tunnel startup/shutdown
+PostUp = /etc/wireguard/anti-leak.sh enable %i
+PostDown = /etc/wireguard/anti-leak.sh disable %i
+
+# Client configurations will be appended below:
+# [Peer]
+# PublicKey = ...
+# AllowedIPs = 10.8.0.X/32, fd86:ea04:1111::X/128
